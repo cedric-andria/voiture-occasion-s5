@@ -16,14 +16,21 @@ import jakarta.persistence.JoinColumn;
 @Entity
 public class Modele {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
     @ManyToOne
-    @JoinColumn(name="idMarque")
+    @JoinColumn(name="id_marque")
     private Marque marque;
     public Modele() {
+ }
+
+    public Modele(String nom, Marque marque) {
+        this.nom = nom;
+        this.marque = marque;
     }
+
     public int getId() {
         return id;
     }
