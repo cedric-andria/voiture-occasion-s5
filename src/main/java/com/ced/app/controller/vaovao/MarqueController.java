@@ -1,7 +1,7 @@
 package com.ced.app.controller.vaovao;
 
 import com.ced.app.model.Vaovao.Marque;
-import com.ced.app.service.MarqueService;
+import com.ced.app.service.vaovao.MarqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,32 +18,28 @@ public class MarqueController {
     }
 
     @GetMapping("all")
-    public List<Marque> getAllVehicules(){
+    public List<Marque> getAllVehicules() {
         return marqueService.getAllMarque();
     }
 
-
     @GetMapping("find/{id}")
-    public Marque getById( @PathVariable("id") int id){
+    public Marque getById(@PathVariable("id") int id) {
         return marqueService.getMarqueById(id);
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteOne(@PathVariable("id") int id)
-    {
+    public String deleteOne(@PathVariable("id") int id) {
         marqueService.deleteMarque(id);
-        return "Voafafa ny Marque(id="+id+")";
+        return "Voafafa ny Marque(id=" + id + ")";
     }
 
     @PutMapping("update/{id}")
-    public void updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
-    {
-        marqueService.updateMarque(id,nom);
+    public void updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom) {
+        marqueService.updateMarque(id, nom);
     }
 
     @PostMapping("insert")
-    public void addNewMarque( @RequestBody Marque marque)
-    {
+    public void addNewMarque(@RequestBody Marque marque) {
         this.marqueService.addMarque(marque);
     }
 
