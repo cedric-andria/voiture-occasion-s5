@@ -43,7 +43,7 @@ public class AnnonceController {
         return new ResponseEntity<>(annonceService.save(annonce), HttpStatus.CREATED);
     }
 
-    @PutMapping("/annonces/edit/{id}")
+    @PutMapping("/annonces/{id}")
     public ResponseEntity<Annonce> updateAnnonce(@PathVariable int id, @RequestBody Annonce updatedAnnonce) {
         // Check if the Annonce with the given id exists
         Optional<Annonce> existingAnnonceOptional = annonceService.findById(id);
