@@ -2,6 +2,7 @@ package com.ced.app.service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +48,9 @@ public class AnnonceService {
         histoannonceRepository.save(new HistoriqueAnnonce(annonce, LocalDateTime.now(), annonce.getEtat()));
         return annonceRepository.save(annonce);
     }
-
+    public Vector<Annonce> searchMultiCri(String cri1)
+    {
+        Vector<Annonce> reponse = new Vector<>();
+        return reponse;
+    }
 }
