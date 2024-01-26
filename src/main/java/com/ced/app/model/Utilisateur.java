@@ -5,7 +5,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 
-import com.ced.app.model.UserStatus;
+import com.ced.app.model.Profil;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
@@ -22,10 +22,24 @@ public class Utilisateur {
     @Column(name="identifiant", unique = true)
     private String identifiant;
     private String mdp;
-
     @ManyToOne
-    @JoinColumn(name="idUserStatus")
-    private UserStatus userStatus;
+    @JoinColumn(name="id_profil")
+    private Profil profil;
+
+    public Utilisateur(String nom, String identifiant, String mdp, Profil profil) {
+        this.nom = nom;
+        this.identifiant = identifiant;
+        this.mdp = mdp;
+        this.profil = profil;
+    }
+
+    public Utilisateur(int id, String nom, String identifiant, String mdp, Profil profil) {
+        this.id = id;
+        this.nom = nom;
+        this.identifiant = identifiant;
+        this.mdp = mdp;
+        this.profil = profil;
+    }
 
     public Utilisateur(String nom, String identifiant, String mdp) {
         this.setNom(nom);
@@ -68,12 +82,12 @@ public class Utilisateur {
         this.mdp = mdp;
     }
 
-    public UserStatus getUserStatus() {
-        return userStatus;
+    public Profil getProfil() {
+        return profil;
     }
 
-    public void setUserStatus(UserStatus userStatus) {
-        this.userStatus = userStatus;
+    public void setProfil(Profil profil) {
+        this.profil = profil;
     }
 
     

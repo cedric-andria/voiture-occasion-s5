@@ -5,26 +5,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-
 @Entity
-public class Marque {
+public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
 
-    public Marque(String nom) {
+    public Categorie(String nom) {
         this.nom = nom;
     }
-    public Marque(int id, String nom) {
+    public Categorie(int id, String nom) {
         this.id = id;
         this.nom = nom;
     }
-    public Marque() {
+    public Categorie() {
     }
     public int getId() {
         return id;
@@ -38,4 +33,6 @@ public class Marque {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+
 }
