@@ -17,31 +17,31 @@ public class CategorieController {
         this.categorieService = categorieService;
     }
 
-    @GetMapping("all")
+    @GetMapping("")
     public List<Categorie> getAllVehicules(){
         return categorieService.getAllCategorie();
     }
 
 
-    @GetMapping("find/{id}")
+    @GetMapping("/{id}")
     public Categorie getById( @PathVariable("id") int id){
         return categorieService.getCategorieById(id);
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public String deleteOne(@PathVariable("id") int id)
     {
         categorieService.deleteCategorie(id);
         return "Voafafa ny Categorie(id="+id+")";
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public void updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
     {
         categorieService.updateCategorie(id,nom);
     }
 
-    @PostMapping("insert")
+    @PostMapping("")
     public void addNewCategorie( @RequestBody Categorie categorie)
     {
         this.categorieService.addCategorie(categorie);
