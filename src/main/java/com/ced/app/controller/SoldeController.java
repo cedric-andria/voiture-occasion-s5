@@ -2,7 +2,7 @@
 package com.ced.app.controller;
 
 import com.ced.app.model.SoldeUtilisateur;
-import com.ced.app.service.SoldeService;
+import com.ced.app.service.SoldeUtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ import java.util.Map;
 @RequestMapping("/solde")
 public class SoldeController {
     @Autowired
-    private SoldeService soldeService;
+    private SoldeUtilisateurService soldeService;
 
     public ResponseEntity<Object> getSoldeUser(@RequestBody Map<String, String> data){
         try {

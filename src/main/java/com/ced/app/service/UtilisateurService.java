@@ -47,6 +47,14 @@ public class UtilisateurService {
         return null;
     }
 
+    public Utilisateur getUserById(int id){
+        Optional<Utilisateur> e = userRepository.findById(id);
+        if (e.isPresent()){
+            return e.get();
+        }
+        return null;
+    }
+
     public boolean isTokenValid(String token) throws Exception{
         boolean toReturn = false;
         try {
