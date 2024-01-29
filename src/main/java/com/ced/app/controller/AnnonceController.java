@@ -53,11 +53,19 @@ public class AnnonceController {
 		return annonceService.getAllAnnonces();
 	}
 
-    @GetMapping("/annonces/except_user/{id_user_actuel}")
-	public List<Annonce> getAllAnnoncesExceptSelf(@PathVariable int id_user_actuel){
+    @GetMapping("/annonces/except_user/")
+	public List<Annonce> getAllAnnoncesExceptSelf(@RequestHeader("Authorization") String bearerToken) {
         // for (Annonce annonce : annonceService.getAllAnnonces()) {
         //     System.out.println("annonce id : " + annonce.getId());
         // }
+        int id_user_actuel = 0;
+        
+        try {
+            id_user_actuel = Integer.parseInt(Utilisateur.extractId(bearerToken.substring(7)));
+            System.out.println("id user actuel " + id_user_actuel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<Annonce> annonces_native = annonceService.getAllAnnonces();
         List<Annonce> filtered_annonces = new ArrayList<>();
 
@@ -70,6 +78,10 @@ public class AnnonceController {
         for (Annonce annonce : filtered_annonces) {
             List<PhotoVoiture> photoVoitures = annonceService.get_photos_of_annonce(annonce.getId(), 3);
             annonce.setPhotos_voiture(photoVoitures);
+        }
+
+        if (id_user_actuel == 0) {
+            throw new IllegalStateException("id manquant");
         }
 
         return filtered_annonces;
