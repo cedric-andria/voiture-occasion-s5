@@ -5,7 +5,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 
-import com.ced.app.model.UserStatus;
+import com.ced.app.model.Profil;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
@@ -23,6 +23,16 @@ public class Modele {
     @ManyToOne
     @JoinColumn(name="id_marque")
     private Marque marque;
+    
+    public Modele(String nom, Marque marque) {
+        this.nom = nom;
+        this.marque = marque;
+    }
+    public Modele(int id, String nom, Marque marque) {
+        this.id = id;
+        this.nom = nom;
+        this.marque = marque;
+    }
     public Modele() {
  }
 
