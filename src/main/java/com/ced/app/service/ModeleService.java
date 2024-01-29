@@ -1,5 +1,6 @@
 package com.ced.app.service;
 
+import com.ced.app.model.Marque;
 import com.ced.app.model.Modele;
 import com.ced.app.repository.ModeleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,4 +15,8 @@ public class ModeleService {
         repo.save(model);
     }
 
+    public Modele getById(int id)
+    {
+        return repo.findById(id).orElseThrow(() -> new IllegalStateException("Modele ID: "+id+" n'existe pas"));
+    }
 }

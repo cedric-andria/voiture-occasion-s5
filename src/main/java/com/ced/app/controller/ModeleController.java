@@ -5,10 +5,7 @@ import com.ced.app.model.Modele;
 import com.ced.app.service.MarqueService;
 import com.ced.app.service.ModeleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Objects;
@@ -30,6 +27,13 @@ public class ModeleController {
         Modele model = new Modele(nom,marque);
         modeleService.save(model);
 
+    }
+
+
+
+    @GetMapping("/{id}")
+    public Modele getById( @PathVariable("id") int id){
+        return modeleService.getById(id);
     }
 
     /** REST
