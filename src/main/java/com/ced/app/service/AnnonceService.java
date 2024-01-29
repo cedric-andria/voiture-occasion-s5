@@ -78,16 +78,16 @@ public class AnnonceService {
 
         try {
             //mbola mi upload
-            for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
-                //mbola ilay chemin cote client izy eto fa miandry anle response zay vao azo ilay chemin alefa any am base
-                formData.add("image", photo_annonce.getPhoto().getChemin());
-                formData.clear();
-            }
-            histoannonceRepository.save(new HistoriqueAnnonce(annonce, LocalDateTime.now(), 0));
-            for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
-                photoRepository.save(photo_annonce.getPhoto());
-                photoVoitureRepository.save(photo_annonce);
-            }
+//            for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
+//                //mbola ilay chemin cote client izy eto fa miandry anle response zay vao azo ilay chemin alefa any am base
+//                formData.add("image", photo_annonce.getPhoto().getChemin());
+//                formData.clear();
+//            }
+//            histoannonceRepository.save(new HistoriqueAnnonce(annonce, LocalDateTime.now(), 0));
+//            for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
+//                photoRepository.save(photo_annonce.getPhoto());
+//                photoVoitureRepository.save(photo_annonce);
+//            }
         } catch (RestClientException restexc) {
             System.out.println(restexc);
         }

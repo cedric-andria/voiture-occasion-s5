@@ -3,6 +3,7 @@ package com.ced.app.controller;
 import com.ced.app.model.SoldeUtilisateur;
 import com.ced.app.model.Utilisateur;
 import com.ced.app.model.auth.Token;
+import com.ced.app.service.ProfilService;
 import com.ced.app.service.SoldeService;
 import com.ced.app.service.SoldeUtilisateurService;
 import com.ced.app.service.UtilisateurService;
@@ -22,6 +23,8 @@ public class UtilisateurController {
     private UtilisateurService userservice;
     @Autowired
     private SoldeUtilisateurService soldeUtilisateur;
+    @Autowired
+    private ProfilService profilService;
 
     @GetMapping
     public List<Utilisateur> getAllUser(){
@@ -60,6 +63,7 @@ public class UtilisateurController {
         String mdp = data.get("mdp");
         //Date dtn = data.get("dtn");
         Utilisateur user = new Utilisateur(nom, identifiant, mdp);
+        user.setProfil(profilService.getById(2));
         userservice.saveUtilisateur(user);
         soldeUtilisateur.createSolde(user, 0);
         Map<String, String> log = new HashMap<>();
