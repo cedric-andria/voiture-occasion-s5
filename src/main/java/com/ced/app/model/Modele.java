@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 @Entity
 public class Modele {
     @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
@@ -34,6 +35,8 @@ public class Modele {
     }
     public Modele() {
     }
+
+
     public int getId() {
         return id;
     }

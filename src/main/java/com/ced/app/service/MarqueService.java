@@ -1,22 +1,20 @@
 package com.ced.app.service;
 
+import com.ced.app.model.Marque;
+import com.ced.app.repository.MarqueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-
 // import com.ced.app.crud.service.GenericService;
-import com.ced.app.model.Marque;
-
-import com.ced.app.repository.MarqueRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MarqueService {
     @Autowired
-    private final MarqueRepository marqueRepository;
+    private MarqueRepository marqueRepository;
 
     public MarqueService(MarqueRepository marqueRepository) {
         this.marqueRepository = marqueRepository;
@@ -61,4 +59,5 @@ public class MarqueService {
     public Marque getMarqueById(int id)
     {
         return marqueRepository.findById(id).orElseThrow(() -> new IllegalStateException("Marque ID: "+id+" n'existe pas"));
-    }}
+    }
+}

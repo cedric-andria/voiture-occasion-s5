@@ -162,6 +162,8 @@ EXECUTE FUNCTION insert_historique_annonce();
 --etat : 0 = publiee, 10 : validee, 20 : vendue
 insert into annonce (id_voiture, prix, description, etat, date_publication) values (1, 150000000, 'Voiture tena tsara, description exemple for id_voiture 1', 10, current_date);
 insert into annonce (id_voiture, prix, description, etat, date_publication) values (2, 480000000, 'Voiture haut de gamme, , description exemple for id_voiture 2', 10, current_date);
+insert into annonce (id_voiture, prix, description, etat, date_publication) values (5, 90000000, 'Engin de construction, etat moyen, 80 tonnes, prix TTC', 0, current_date);
+
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
@@ -181,7 +183,7 @@ insert into Favori(id_annonce, id_utilisateur) values (1, 3);
 CREATE OR REPLACE FUNCTION check_date_operation()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.date_operation <= (SELECT date_publication FROM Annonce WHERE id = NEW.id_annonce) THEN
+    IF NEW.date_operation < (SELECT date_publication FROM Annonce WHERE id = NEW.id_annonce) THEN
         RAISE EXCEPTION 'date_operation must be greater or equal than date_publication';
     END IF;
     RETURN NEW;

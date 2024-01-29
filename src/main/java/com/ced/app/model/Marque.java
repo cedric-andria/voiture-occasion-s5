@@ -1,14 +1,9 @@
 package com.ced.app.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Entity;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
 
 @Entity
 public class Marque {
@@ -37,5 +32,13 @@ public class Marque {
     }
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return "Marque{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
     }
 }

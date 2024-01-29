@@ -18,9 +18,7 @@ public class MessagesController {
     private MessagesService messagesService;
 
     @GetMapping("/{iduser1}/{iduser2}")
-    public List<Messages> getDiscussionBetweenUsers(@PathVariable String iduser1, @PathVariable String iduser2)
-    {
+    public List<Messages> getDiscussionBetweenUsers(@PathVariable String iduser1, @PathVariable String iduser2) {
         return messagesService.getMessagesBetweenUsers(iduser1, iduser2);
     }
-
 }

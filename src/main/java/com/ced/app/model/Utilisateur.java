@@ -4,6 +4,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
+import java.sql.Date;
+import com.ced.app.model.Profil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -60,6 +62,7 @@ public class Utilisateur {
         //System.out.println("Secret key : "+this.secret);
         return Jwts.builder()
                 .setSubject("data user")
+                .claim("id", user.getId())
                 .claim("identifiant",user.getIdentifiant())
                 .claim("nom",user.getNom())
                 .setExpiration(new Date(System.currentTimeMillis() + 864000000)) // 10 days validity\
@@ -125,6 +128,10 @@ public class Utilisateur {
 
     public static String extractEmail(String token){
         return (String) Utilisateur.extractClaims(token).get("identifiant");
+    }
+
+    public static String extractId(String token){
+        return (String) Utilisateur.extractClaims(token).get("id");
     }
 
     public static String extractToken(String bearerToken) throws Exception{

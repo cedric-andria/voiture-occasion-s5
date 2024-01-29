@@ -1,11 +1,13 @@
 package com.ced.app.controller;
 
+import com.ced.app.model.Marque;
+import com.ced.app.service.MarqueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import com.ced.app.service.MarqueService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
-import com.ced.app.model.Marque;
 
 @RestController
 @RequestMapping(path = "Marque")
@@ -37,7 +39,7 @@ public class MarqueController {
     }
 
     @PutMapping("/{id}")
-    public void updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
+    public void updateMarque(@PathVariable("id") int id, @RequestParam(required = false) String nom)
     {
         marqueService.updateMarque(id,nom);
     }

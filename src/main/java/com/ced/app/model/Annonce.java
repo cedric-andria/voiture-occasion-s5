@@ -1,10 +1,12 @@
 package com.ced.app.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,8 @@ public class Annonce {
     private String description;
     private int etat;
     private LocalDateTime date_publication;
-
+    @Transient
+    private List<PhotoVoiture> photos_voiture;
     
     public Annonce(Voiture voiture, double prix, String description, int etat, LocalDateTime date_publication) {
         this.voiture = voiture;
@@ -78,6 +81,12 @@ public class Annonce {
     }
     public void setDate_publication(LocalDateTime date_publication) {
         this.date_publication = date_publication;
+    }
+    public List<PhotoVoiture> getPhotos_voiture() {
+        return photos_voiture;
+    }
+    public void setPhotos_voiture(List<PhotoVoiture> photos_voiture) {
+        this.photos_voiture = photos_voiture;
     }
 
 }
