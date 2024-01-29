@@ -29,6 +29,20 @@ public class Annonce {
     @Transient
     private List<PhotoVoiture> photos_voiture;
     
+    public Annonce(double prix, String description, int etat, LocalDateTime date_publication,
+            List<PhotoVoiture> photos_voiture) {
+        this.prix = prix;
+        this.description = description;
+        this.etat = etat;
+        this.date_publication = date_publication;
+        this.photos_voiture = photos_voiture;
+    }
+    public Annonce(double prix, String description, int etat, LocalDateTime date_publication) {
+        this.prix = prix;
+        this.description = description;
+        this.etat = etat;
+        this.date_publication = date_publication;
+    }
     public Annonce(Voiture voiture, double prix, String description, int etat, LocalDateTime date_publication) {
         this.voiture = voiture;
         this.prix = prix;

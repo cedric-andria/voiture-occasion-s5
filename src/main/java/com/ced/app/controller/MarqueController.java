@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping(path = "Marque")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MarqueController {
-
     @Autowired
     private MarqueService marqueService;
 
