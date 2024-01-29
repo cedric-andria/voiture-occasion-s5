@@ -53,7 +53,7 @@ public class AnnonceController {
 		return annonceService.getAllAnnonces();
 	}
 
-    @GetMapping("/annonces/except_user/")
+    @GetMapping("/annonces/except_user")
 	public List<Annonce> getAllAnnoncesExceptSelf(@RequestHeader("Authorization") String bearerToken) {
         // for (Annonce annonce : annonceService.getAllAnnonces()) {
         //     System.out.println("annonce id : " + annonce.getId());
@@ -87,8 +87,17 @@ public class AnnonceController {
         return filtered_annonces;
 	}
 
-    @GetMapping("/annonces/favoris/{id_user_actuel}")
-	public List<Annonce> getAllAnnoncesFavorites(@PathVariable int id_user_actuel){
+    @GetMapping("/annonces/favoris")
+	public List<Annonce> getAllAnnoncesFavorites(@RequestHeader("Authorization") String bearerToken){
+        int id_user_actuel = 0;
+        
+        try {
+            id_user_actuel = Integer.parseInt(Utilisateur.extractId(bearerToken.substring(7)));
+            System.out.println("id user actuel " + id_user_actuel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalStateException("non autorisé");
+        }
         // for (Annonce annonce : annonceService.getAllAnnonces()) {
         //     System.out.println("annonce id : " + annonce.getId());
         // }
@@ -101,13 +110,18 @@ public class AnnonceController {
 	}
 
     @PostMapping("/annonces/favoris/")
-	public Favori setAnnonceToFavori(@RequestHeader("Authorization") String bearerToken)
+	public Favori setAnnonceToFavori(@RequestHeader("Authorization") String bearerToken, @RequestBody Favori favori)
     {
-        String token = bearerToken.substring(7);
-        int id_user_actuel = Integer.parseInt(Utilisateur.extractId(token));
+        int id_user_actuel = 0;
         
-
-        return new Favori();
+        try {
+            id_user_actuel = Integer.parseInt(Utilisateur.extractId(bearerToken.substring(7)));
+            System.out.println("id user actuel " + id_user_actuel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalStateException("non autorisé");
+        }
+        return favoriService.save(favori);
 	}
 
     @GetMapping("/annonces/etat/lessthan/10")

@@ -48,4 +48,9 @@ public class FavoriService {
     {
         return favoriRepository.findById(id);
     }
+
+    public Favori save(Favori favori)
+    {
+        return favoriRepository.save(favori);
+    }
 }

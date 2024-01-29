@@ -6,7 +6,7 @@ import com.ced.app.service.MarqueService;
 import com.ced.app.service.ModeleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -30,7 +30,11 @@ public class ModeleController {
 
     }
 
-
+    @GetMapping("/{id}/marques/")
+    public List<Modele> getAllModeleByMarque(@PathVariable int id)
+    {
+        return modeleService.getAllByMarque(id);
+    }
 
     @GetMapping("/{id}")
     public Modele getById( @PathVariable("id") int id){
