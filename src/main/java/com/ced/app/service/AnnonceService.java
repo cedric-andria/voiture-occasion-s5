@@ -78,7 +78,7 @@ public class AnnonceService {
     }
 
     @Transactional
-    public Annonce save(Annonce annonce, Voiture voiture)
+    public Annonce save(Annonce annonce)
     {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -92,7 +92,7 @@ public class AnnonceService {
         PhotoVoiture photoVoiture_temporaire = null;
         try {
             //rehefa eo am react dia ny object annonce asiana array de photos_voiture
-            voiture_temporaire = voitureRepository.save(voiture);
+            voiture_temporaire = voitureRepository.save(annonce.getVoiture());
             for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
                 //mbola ilay chemin cote client izy eto fa miandry anle response zay vao azo ilay chemin alefa any am base
                 formData.add("image", photo_annonce.getPhoto().getChemin());
