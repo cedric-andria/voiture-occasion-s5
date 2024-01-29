@@ -91,7 +91,6 @@ public class AnnonceService {
         Photo photo_temporaire = null;
         PhotoVoiture photoVoiture_temporaire = null;
         try {
-            //mbola mi upload
             //rehefa eo am react dia ny object annonce asiana array de photos_voiture
             voiture_temporaire = voitureRepository.save(voiture);
             for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
