@@ -22,5 +22,3 @@ public class MessagesController {
     {
         return messagesService.getMessagesBetweenUsers(iduser1, iduser2);
     }
-
-}

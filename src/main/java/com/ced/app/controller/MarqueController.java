@@ -1,16 +1,20 @@
 package com.ced.app.controller;
 
+import com.ced.app.model.Marque;
+import com.ced.app.service.MarqueService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import com.ced.app.service.MarqueService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
-import com.ced.app.model.Marque;
 
 @RestController
 @RequestMapping(path = "Marque")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MarqueController {
+
+    @Autowired
     private MarqueService marqueService;
 
     public MarqueController(MarqueService marqueService) {

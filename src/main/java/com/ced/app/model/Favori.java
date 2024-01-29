@@ -18,4 +18,33 @@ public class Favori {
     @ManyToOne
     @JoinColumn(name="id_utilisateur")
     private Utilisateur utilisateur;
+    public Favori(Annonce annonce, Utilisateur utilisateur) {
+        this.annonce = annonce;
+        this.utilisateur = utilisateur;
+    }
+    public Favori(int id, Annonce annonce, Utilisateur utilisateur) {
+        this.id = id;
+        this.annonce = annonce;
+        this.utilisateur = utilisateur;
+    }
+    public Favori() {
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public Annonce getAnnonce() {
+        return annonce;
+    }
+    public void setAnnonce(Annonce annonce) {
+        this.annonce = annonce;
+    }
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
 }
