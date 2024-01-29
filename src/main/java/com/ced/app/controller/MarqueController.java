@@ -40,7 +40,7 @@ public class MarqueController {
     }
 
     @PutMapping("/{id}")
-    public void updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
+    public void updateMarque(@PathVariable("id") int id, @RequestParam(required = false) String nom)
     {
         marqueService.updateMarque(id,nom);
     }

@@ -26,8 +26,8 @@ public class ModeleController {
 
         String nom = data.get("nom");
 
-        Marque marque = service.getbyid(Integer.valueOf(data.get("id_marque")));
-       Modele model = new Modele(nom,marque);
+        Marque marque = service.getMarqueById(Integer.valueOf(data.get("id_marque")));
+        Modele model = new Modele(nom,marque);
         modeleService.save(model);
 
     }

@@ -1,7 +1,10 @@
 package com.ced.app.controller;
 
+import com.ced.app.model.SoldeUtilisateur;
 import com.ced.app.model.Utilisateur;
 import com.ced.app.model.auth.Token;
+import com.ced.app.service.SoldeService;
+import com.ced.app.service.SoldeUtilisateurService;
 import com.ced.app.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +20,8 @@ import java.util.Map;
 public class UtilisateurController {
     @Autowired
     private UtilisateurService userservice;
+    @Autowired
+    private SoldeUtilisateurService soldeUtilisateur;
 
     @GetMapping
     public List<Utilisateur> getAllUser(){
@@ -56,6 +61,7 @@ public class UtilisateurController {
         //Date dtn = data.get("dtn");
         Utilisateur user = new Utilisateur(nom, identifiant, mdp);
         userservice.saveUtilisateur(user);
+        soldeUtilisateur.createSolde(user, 0);
         Map<String, String> log = new HashMap<>();
         log.put("identifiant", user.getIdentifiant());
         log.put("mdp", user.getMdp());

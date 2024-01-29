@@ -58,26 +58,6 @@ public class MarqueService {
 
     public Marque getMarqueById(int id)
     {
-        Marque emp = marqueRepository.findById(id).orElseThrow(() -> new IllegalStateException("--UPDATE IMPOSSIBLE-- La Marque id :\"+id+\" n'existe pas "));
-        if(nom!=null)
-        {
-            emp.setNom(nom);
-        }
-        System.out.println("UPDATE REUSSI");
-    }
-
-    public void addMarque(Marque marque) {
-        Optional<Marque> marqueExist = marqueRepository.findByNom(marque.getNom());
-        if(marqueExist.isPresent())
-        {
-            throw new IllegalStateException("Marque : "+marque+" deja dans la base");
-        }
-        marqueRepository.save(marque);
-        System.out.println(marque.toString() +" TONGA soamantsara");
-    }
-
-    public Marque getMarqueById(int id)
-    {
         return marqueRepository.findById(id).orElseThrow(() -> new IllegalStateException("Marque ID: "+id+" n'existe pas"));
     }
 }
