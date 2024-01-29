@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
     Optional<Utilisateur> findByIdentifiant(String identifiant);
+    Optional<Utilisateur> findById(int id);
+
 }

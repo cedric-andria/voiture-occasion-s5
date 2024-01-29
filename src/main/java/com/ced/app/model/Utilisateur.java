@@ -4,19 +4,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
-
 import java.sql.Date;
-
 import com.ced.app.model.Profil;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.persistence.Column;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
+import com.ced.app.model.Profil;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinTable;
+
+import java.sql.Date;
 
 @Entity
 public class Utilisateur {

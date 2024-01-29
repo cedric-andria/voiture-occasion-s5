@@ -32,7 +32,7 @@ public class UtilisateurController {
             System.out.println(data.get("message"));
         }
         Utilisateur authenticatedUser = userservice.authenticateUser(identifiant, mdp);
-        
+
         if (authenticatedUser != null) {
             // Return successful authentication response
             System.out.println("User is authentified");
