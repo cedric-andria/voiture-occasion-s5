@@ -11,6 +11,7 @@ import com.ced.app.model.Marque;
 @RequestMapping(path = "Marque")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class MarqueController {
+    @Autowired
     private MarqueService marqueService;
 
     public MarqueController(MarqueService marqueService) {
