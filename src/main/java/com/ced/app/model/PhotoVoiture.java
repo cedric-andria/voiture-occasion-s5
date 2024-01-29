@@ -18,6 +18,7 @@ public class PhotoVoiture {
     @ManyToOne
     @JoinColumn(name="id_annonce")
     private Annonce annonce;
+
     public PhotoVoiture(Photo photo, Annonce annonce) {
         this.photo = photo;
         this.annonce = annonce;
