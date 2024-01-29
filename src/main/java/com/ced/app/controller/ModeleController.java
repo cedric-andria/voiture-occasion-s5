@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @RequestMapping("/modele")
 @RestController
+@CrossOrigin(origins = "*", methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ModeleController {
     @Autowired
     private ModeleService modeleService;
