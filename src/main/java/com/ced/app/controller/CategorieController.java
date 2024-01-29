@@ -43,7 +43,7 @@ public class CategorieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categorie> updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
+    public ResponseEntity<Categorie> updateCategorire(@RequestHeader("Authorization") String bearerToken, @PathVariable("id") int id, @RequestParam(required = false) String nom)
     {
         Optional<Categorie> existingCategorieOptional = categorieService.findById(id);
         if (existingCategorieOptional.isPresent()) {

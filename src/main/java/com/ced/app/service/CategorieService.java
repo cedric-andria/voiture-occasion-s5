@@ -22,7 +22,7 @@ public class CategorieService {
 
     public List<Categorie> getAllCategorie()
     {
-        return categorieRepository.findAll();
+        return categorieRepository.findAllByOrderById();
     }
 
     public Optional<Categorie> findById(int id){

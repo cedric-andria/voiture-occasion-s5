@@ -39,7 +39,13 @@ public class UtilisateurController {
         if (data.get("message")!= null){
             System.out.println(data.get("message"));
         }
-        Utilisateur authenticatedUser = userservice.authenticateUser(identifiant, mdp);
+        Utilisateur authenticatedUser = null;
+        try {
+            authenticatedUser = userservice.authenticateUser(identifiant, mdp);
+
+        } catch (Exception e) {
+            throw new Exception("Utilisateur non reconnu");
+        }
 
         if (authenticatedUser != null) {
             // Return successful authentication response

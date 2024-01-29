@@ -25,46 +25,46 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         WebMvcConfigurer.super.addInterceptors(registry);
 
-        registry.addInterceptor(jwtInterceptor())
-                .addPathPatterns("/annonces").excludePathPatterns(HttpMethod.GET.toString());
+        // registry.addInterceptor(jwtInterceptor())
+        //         .addPathPatterns("/annonces").excludePathPatterns(HttpMethod.GET.toString());
 
-        registry.addInterceptor(jwtInterceptor())
-                .addPathPatterns("/annonces/except_user/");
+        // registry.addInterceptor(jwtInterceptor())
+        //         .addPathPatterns("/annonces/except_user/");
 
-        registry.addInterceptor(jwtInterceptor())
-                .addPathPatterns("/annonces/favoris/");
+        // registry.addInterceptor(jwtInterceptor())
+        //         .addPathPatterns("/annonces/favoris/");
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/annonces/etat/lessthan/10");
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/annonces/etat/lessthan/10");
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/annonces/{id}").excludePathPatterns(HttpMethod.GET.toString());
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/annonces/{id}").excludePathPatterns(HttpMethod.GET.toString());
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/{id}")
-            .excludePathPatterns(HttpMethod.GET.toString());
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/{id}")
+        //     .excludePathPatterns(HttpMethod.GET.toString());
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/nbVente");            
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/nbVente");            
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/nbVenteBetween");            
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/nbVenteBetween");            
 
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/historique_annonce/**");
+        // registry.addInterceptor(jwtInterceptor()).addPathPatterns("/historique_annonce/**");
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/Marque/{id}")
-            .excludePathPatterns(HttpMethod.GET.toString());
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Marque/{id}")
+        //     .excludePathPatterns(HttpMethod.GET.toString());
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/Marque/nbVente");            
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Marque/nbVente");            
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/Marque/nbVenteBetween");  
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Marque/nbVenteBetween");  
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/modele").addPathPatterns();
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/modele").addPathPatterns();
 
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/messages/**");
+        // registry.addInterceptor(jwtInterceptor()).addPathPatterns("/messages/**");
 
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/soldeutilisateur/**");
+        // registry.addInterceptor(jwtInterceptor()).addPathPatterns("/soldeutilisateur/**");
 
-        registry.addInterceptor(profilInterceptor()).addPathPatterns("/solde/**");
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/solde/**");
 
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/vente");
+        // registry.addInterceptor(jwtInterceptor()).addPathPatterns("/vente");
 
-        registry.addInterceptor(jwtInterceptor()).addPathPatterns("/ws/**");
+        // registry.addInterceptor(jwtInterceptor()).addPathPatterns("/ws/**");
 
     }
 }

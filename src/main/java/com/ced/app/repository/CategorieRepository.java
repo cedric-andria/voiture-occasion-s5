@@ -13,6 +13,8 @@ import java.util.Optional;
 @Repository
 public interface CategorieRepository extends JpaRepository<Categorie,Integer> {
 
+        List<Categorie> findAllByOrderById();
+
     @Query("SELECT c FROM Categorie c WHERE c.nom=?1 ")
     Optional<Categorie> findByNom(String prenom);
 

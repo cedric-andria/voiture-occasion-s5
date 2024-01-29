@@ -32,7 +32,7 @@ public class UtilisateurService {
     }
 
     public Utilisateur authenticateUser(String email, String password) {
-        Optional<Utilisateur> optionalUser = userRepository.findByIdentifiant(email);
+        Optional<Utilisateur> optionalUser = userRepository.findByIdentifiantAndMdp(email, password);
         Utilisateur toReturn = optionalUser.get();
         if (optionalUser.isPresent()) {
             System.out.println("REsult ============= "+toReturn.getIdentifiant()+" ============ "+toReturn.getMdp());

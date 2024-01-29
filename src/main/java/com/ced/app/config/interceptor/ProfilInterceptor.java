@@ -17,12 +17,13 @@ public class ProfilInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String bearerToken = request.getHeader("Authorization");
-        System.out.println("===============================middleware");
+        System.out.println("===============================middleware profil");
         if (Utilisateur.isBearerTokenValid(bearerToken)) {
             String token = bearerToken.substring(7);
             if (Utilisateur.isTokenExpired(token)){
                 Utilisateur user = utilisateurService.getByEmail(Utilisateur.extractEmail(token));
                 if (user != null){
+                    System.out.println("Id profil de l'user : " + user.getProfil().getId());
                     if (user.getProfil().getId() != 1) {
                         throw new Exception("Methode non autorise pour l'utilisateur");
                     }
