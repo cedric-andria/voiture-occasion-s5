@@ -1,14 +1,18 @@
 package com.ced.app.controller;
 
+import com.ced.app.model.Annonce;
 import com.ced.app.model.Categorie;
 import com.ced.app.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "Categorie")
@@ -39,9 +43,19 @@ public class CategorieController {
     }
 
     @PutMapping("/{id}")
-    public void updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
+    public ResponseEntity<Categorie> updateCategorire(@PathVariable("id") int id, @RequestParam(required = false) String nom)
     {
-        categorieService.updateCategorie(id,nom);
+        Optional<Categorie> existingCategorieOptional = categorieService.findById(id);
+        if (existingCategorieOptional.isPresent()) {
+
+            // Save the updated Annonce
+            Categorie savedCategorie = categorieService.updateCategorie(id,nom);
+
+            return new ResponseEntity<>(savedCategorie, HttpStatus.OK);
+        } else {
+            // Annonce with the given id not found
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("")

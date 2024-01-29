@@ -25,6 +25,10 @@ public class CategorieService {
         return categorieRepository.findAll();
     }
 
+    public Optional<Categorie> findById(int id){
+        return categorieRepository.findById(id);
+    }
+
     public void deleteCategorie(int id)
     {
         if(!categorieRepository.existsById(id))
@@ -36,7 +40,7 @@ public class CategorieService {
     }
 
     @Transactional
-    public void updateCategorie(int id, String nom)
+    public Categorie updateCategorie(int id, String nom)
     {
         Categorie emp = categorieRepository.findById(id).orElseThrow(() -> new IllegalStateException("--UPDATE IMPOSSIBLE-- La Categorie id :\"+id+\" n'existe pas "));
         if(nom!=null)
@@ -44,6 +48,7 @@ public class CategorieService {
             emp.setNom(nom);
         }
         System.out.println("UPDATE REUSSI");
+        return emp;
     }
 
     public void addCategorie(Categorie categorie) {
