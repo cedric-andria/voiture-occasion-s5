@@ -4,8 +4,9 @@ import com.ced.app.model.Marque;
 import com.ced.app.repository.MarqueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
+
+import java.time.LocalDateTime;
+import java.util.*;
 // import com.ced.app.crud.service.GenericService;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -59,5 +60,31 @@ public class MarqueService {
     public Marque getMarqueById(int id)
     {
         return marqueRepository.findById(id).orElseThrow(() -> new IllegalStateException("Marque ID: "+id+" n'existe pas"));
+    }
+    public List<Marque> getAllMarquesWithNbVenteBetween(LocalDateTime dateDebut, LocalDateTime dateFin) {
+        List<Object[]> results = marqueRepository.findMarquesWithNbVenteBetween(dateDebut, dateFin);
+        List<Marque> marques = new ArrayList<>();
+        for (Object[] result : results)
+        {
+            Marque marque = new Marque();
+            marque.setId((int) result[0]);
+            marque.setNom((String) result[1]);
+            marque.setNb_vente(((Long) result[2]).intValue());
+            marques.add(marque);
+        }
+        return marques;
+    }
+    public List<Marque> getAllMarquesWithNbVente() {
+        List<Object[]> results = marqueRepository.findMarquesWithNbVente();
+        List<Marque> marques = new ArrayList<>();
+        for (Object[] result : results)
+        {
+            Marque marque = new Marque();
+            marque.setId((int) result[0]);
+            marque.setNom((String) result[1]);
+            marque.setNb_vente(((Long) result[2]).intValue());
+            marques.add(marque);
+        }
+        return marques;
     }
 }

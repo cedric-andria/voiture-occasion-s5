@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import com.ced.app.service.MarqueService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -48,5 +52,26 @@ public class MarqueController {
     public void addNewMarque( @RequestBody Marque marque)
     {
         this.marqueService.addMarque(marque);
+    }
+
+    @GetMapping("/nbVenteBetween")
+    public List<Marque> getAllMarquesWithNbVenteBetween(@RequestParam("dateDebut") String dateDebut, @RequestParam("dateFin") String dateFin)
+    {
+        LocalDateTime debut = convertStringToLocalDateTime(dateDebut,"yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fin = convertStringToLocalDateTime(dateFin,"yyyy-MM-dd HH:mm:ss");
+        return marqueService.getAllMarquesWithNbVenteBetween(debut, fin);
+    }
+    @GetMapping("/nbVente")
+    public List<Marque> getAllMarquesWithNbVente()
+    {
+        return marqueService.getAllMarquesWithNbVente();
+    }
+    public static LocalDateTime convertStringToLocalDateTime(String dateTimeStr, String format) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            return LocalDateTime.parse(dateTimeStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date-time format. Please use " + format, e);
+        }
     }
 }

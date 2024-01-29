@@ -1,9 +1,6 @@
 package com.ced.app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Marque {
@@ -11,7 +8,8 @@ public class Marque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
-
+    @Transient
+    private int nb_vente;
     public Marque(String nom) {
         this.nom = nom;
     }
@@ -32,6 +30,14 @@ public class Marque {
     }
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public int getNb_vente() {
+        return nb_vente;
+    }
+
+    public void setNb_vente(int nb_vente) {
+        this.nb_vente = nb_vente;
     }
 
     @Override
