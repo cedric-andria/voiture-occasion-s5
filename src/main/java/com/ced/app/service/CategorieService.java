@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,5 +59,31 @@ public class CategorieService {
     public Categorie getCategorieById(int id)
     {
         return categorieRepository.findById(id).orElseThrow(() -> new IllegalStateException("Categorie ID: "+id+" n'existe pas"));
+    }
+    public List<Categorie> getAllCategorieWithNbVenteBetween(LocalDateTime dateDebut, LocalDateTime dateFin) {
+        List<Object[]> results = categorieRepository.findCategoriesWithNbVenteBetween(dateDebut,dateFin);
+        List<Categorie> categories = new ArrayList<Categorie>();
+        for (Object[] result : results)
+        {
+            Categorie categorie = new Categorie();
+            categorie.setId((int) result[0]);
+            categorie.setNom((String) result[1]);
+            categorie.setNb_vente(((Long) result[2]).intValue());
+            categories.add(categorie);
+        }
+        return categories;
+    }
+    public List<Categorie> getAllCategorieWithNbVente() {
+        List<Object[]> results = categorieRepository.findCategoriesWithNbVente();
+        List<Categorie> categories = new ArrayList<>();
+        for (Object[] result : results)
+        {
+            Categorie categorie = new Categorie();
+            categorie.setId((int) result[0]);
+            categorie.setNom((String) result[1]);
+            categorie.setNb_vente(((Long) result[2]).intValue());
+            categories.add(categorie);
+        }
+        return categories;
     }
 }

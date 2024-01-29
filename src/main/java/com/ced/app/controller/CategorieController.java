@@ -5,6 +5,9 @@ import com.ced.app.service.CategorieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @RestController
@@ -47,4 +50,24 @@ public class CategorieController {
         this.categorieService.addCategorie(categorie);
     }
 
+    @GetMapping("/nbVenteBetween")
+    public List<Categorie> getAllCategoriesWithNbVenteBetween(@RequestParam("dateDebut") String dateDebut, @RequestParam("dateFin") String dateFin)
+    {
+        LocalDateTime debut = convertStringToLocalDateTime(dateDebut,"yyyy-MM-dd HH:mm:ss");
+        LocalDateTime fin = convertStringToLocalDateTime(dateFin,"yyyy-MM-dd HH:mm:ss");
+        return categorieService.getAllCategorieWithNbVenteBetween(debut, fin);
+    }
+    @GetMapping("/nbVente")
+    public List<Categorie> getAllCategoriesWithNbVente()
+    {
+        return categorieService.getAllCategorieWithNbVente();
+    }
+    public static LocalDateTime convertStringToLocalDateTime(String dateTimeStr, String format) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+            return LocalDateTime.parse(dateTimeStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date-time format. Please use " + format, e);
+        }
+    }
 }
