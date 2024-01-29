@@ -16,11 +16,16 @@ public class Photo {
     @JoinColumn(name="id_voiture")
     private Voiture voiture;
     private String chemin;
+    
+    public Photo(String chemin) {
+        this.chemin = chemin;
+    }
     public Photo(int id, Voiture voiture, String chemin) {
         this.id = id;
         this.voiture = voiture;
         this.chemin = chemin;
     }
+    
     public Photo(Voiture voiture, String chemin) {
         this.voiture = voiture;
         this.chemin = chemin;
