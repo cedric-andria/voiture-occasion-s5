@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ced.app.model.Annonce;
 import com.ced.app.model.HistoriqueAnnonce;
+import com.ced.app.model.Utilisateur;
 import com.ced.app.service.AnnonceService;
 import com.ced.app.service.HistoriqueAnnonceService;
 
@@ -34,7 +35,7 @@ public class HistoriqueAnnonceController {
 	}
 
     @GetMapping("/historique_annonce/current_user")
-	public List<HistoriqueAnnonce> getHistoriqueCurrentUser(@RequestHeader("Authorization") String bearerToken,){
+	public List<HistoriqueAnnonce> getHistoriqueCurrentUser(@RequestHeader("Authorization") String bearerToken){
         // for (Annonce annonce : annonceService.getAllAnnonces()) {
         //     System.out.println("annonce id : " + annonce.getId());
         // }
