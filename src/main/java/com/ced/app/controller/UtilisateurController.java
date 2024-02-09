@@ -8,6 +8,8 @@ import com.ced.app.service.SoldeService;
 import com.ced.app.service.SoldeUtilisateurService;
 import com.ced.app.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 //import java.sql.Date;
@@ -69,7 +71,7 @@ public class UtilisateurController {
         String mdp = data.get("mdp");
         //Date dtn = data.get("dtn");
         Utilisateur user = new Utilisateur(nom, identifiant, mdp);
-        user.setProfil(profilService.getById(2));
+        user.setProfil(profilService.getById(1));
         userservice.saveUtilisateur(user);
         soldeUtilisateur.createSolde(user, 0);
         Map<String, String> log = new HashMap<>();
@@ -77,6 +79,22 @@ public class UtilisateurController {
         log.put("mdp", user.getMdp());
         Token token = checklogin(log);
         return token;
+
+    }
+
+    @GetMapping("/checkprofil")
+    public ResponseEntity<HashMap<String, Object>> verifyUserProfil(@RequestHeader("Authorization") String bearerToken) throws Exception{
+        HashMap<String, Object> hashmap = new HashMap<>();
+        int id_profil = -1;
+        try {
+            id_profil = Integer.parseInt(Utilisateur.extractIdprofil(bearerToken.substring(7)));
+            System.out.println("id_profil " + id_profil);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IllegalStateException("something went wrong parsing the token");
+        }
+        hashmap.put("idprofil", id_profil);
+        return new ResponseEntity<HashMap<String, Object>>(hashmap, HttpStatus.OK);
 
     }
 }

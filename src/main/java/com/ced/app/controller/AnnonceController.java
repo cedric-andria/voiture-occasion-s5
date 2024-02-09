@@ -53,8 +53,26 @@ public class AnnonceController {
 		return annonceService.getAllAnnonces();
 	}
 
-    @GetMapping("/annonces/except_user")
-	public List<Annonce> getAllAnnoncesExceptSelf(@RequestHeader("Authorization") String bearerToken) {
+    @GetMapping("/annonces/current_user")
+    public List<Annonce> getAllAnnoncesOfCurrentUser(@RequestHeader("Authorization") String bearerToken) {
+        // for (Annonce annonce : annonceService.getAllAnnonces()) {
+        //     System.out.println("annonce id : " + annonce.getId());
+        // }
+        int id_user_actuel = 0;
+        
+        try {
+            id_user_actuel = Integer.parseInt(Utilisateur.extractId(bearerToken.substring(7)));
+            System.out.println("id user actuel " + id_user_actuel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<Annonce> filtered_annonces = annonceService.getAnnonceOfUser(id_user_actuel);
+
+        return filtered_annonces;
+    }
+
+    @GetMapping("/annonces/exceptuser")
+	public List<Annonce> getAllAnnoncesValideesExceptSelf(@RequestHeader("Authorization") String bearerToken) {
         // for (Annonce annonce : annonceService.getAllAnnonces()) {
         //     System.out.println("annonce id : " + annonce.getId());
         // }
@@ -71,17 +89,19 @@ public class AnnonceController {
 
         for (Annonce annonce : annonces_native) {
             if (annonce.getVoiture().getVendeur().getId() != id_user_actuel) {
-                filtered_annonces.add(annonce);
+                if (annonce.getEtat() == 10) {
+                    filtered_annonces.add(annonce);
+                }
             }
         }
 
-        for (Annonce annonce : filtered_annonces) {
-            List<PhotoVoiture> photoVoitures = annonceService.get_photos_of_annonce(annonce.getId(), 3);
-            annonce.setPhotos_voiture(photoVoitures);
-        }
+        // for (Annonce annonce : filtered_annonces) {
+        //     List<PhotoVoiture> photoVoitures = annonceService.get_photos_of_annonce(annonce.getId(), 3);
+        //     annonce.setPhotos_voiture(photoVoitures);
+        // }
 
         if (id_user_actuel == 0) {
-            throw new IllegalStateException("id manquant");
+            System.out.println("id user actuel = 0");
         }
 
         return filtered_annonces;
@@ -109,7 +129,7 @@ public class AnnonceController {
         return annonces_favorites;
 	}
 
-    @PostMapping("/annonces/favoris/")
+    @PostMapping("/annonces/favoris")
 	public Favori setAnnonceToFavori(@RequestHeader("Authorization") String bearerToken, @RequestBody Favori favori)
     {
         int id_user_actuel = 0;
@@ -139,8 +159,8 @@ public class AnnonceController {
         Annonce temp_annonce = null;
         if (optionalAnnonce.isPresent()) {
             temp_annonce = optionalAnnonce.get();
-            List<PhotoVoiture> photosAnnonces = annonceService.get_photos_of_annonce(temp_annonce.getId(), 3);
-            temp_annonce.setPhotos_voiture(photosAnnonces);
+            // List<PhotoVoiture> photosAnnonces = annonceService.get_photos_of_annonce(temp_annonce.getId(), 3);
+            // temp_annonce.setPhotos_voiture(photosAnnonces);
         }
 		return Optional.ofNullable(temp_annonce).map(annonce -> new ResponseEntity<>(annonce, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 	}

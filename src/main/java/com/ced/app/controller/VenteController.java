@@ -1,22 +1,35 @@
 package com.ced.app.controller;
 
 import com.ced.app.model.Annonce;
+import com.ced.app.model.Categorie;
+import com.ced.app.model.Marque;
+import com.ced.app.model.StatVente_Marque;
 import com.ced.app.model.Utilisateur;
 import com.ced.app.model.Vente;
 import com.ced.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 @RestController
-@RequestMapping("/vente")
+@RequestMapping(path = "/vente")
+@CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Content-Type", "Authorization"}, allowCredentials = "true")
 public class VenteController {
     @Autowired
     private UtilisateurService utilisateur;
@@ -26,6 +39,10 @@ public class VenteController {
     private AnnonceService annonceService;
     @Autowired
     private VenteService venteService;
+    @Autowired
+    private MarqueService marqueService;
+    @Autowired
+    private CategorieService categorieService;
     @Autowired
     private SoldeService soldeCommissionService;
     @Autowired
@@ -75,4 +92,40 @@ public class VenteController {
         }
         return ResponseEntity.ok().body("transaction effectuer");
     }
+
+    @GetMapping("/statmarque")
+    public ResponseEntity<HashMap<String, Object>> getStatVente_marque() {
+        HashMap<String, Object> hashMap_marque_stat = new HashMap<>();
+
+        double totalVentes = (double)venteService.countAllVentes();
+        System.out.println("total ventes : " + totalVentes);
+        for(Marque marque : marqueService.getAllMarque())
+        {
+            System.out.println("id marque : " + marque.getId());
+            List<Vente> ventes_one_marque = venteService.getAllStatFromOneMarque(marque.getId());
+            System.out.println("vente one marque.size : " + ventes_one_marque.size());
+            hashMap_marque_stat.put(marque.getNom(), (ventes_one_marque.size()/totalVentes)*100);
+        }
+
+        return new ResponseEntity<HashMap<String, Object>>(hashMap_marque_stat, HttpStatus.OK);
+    }
+
+    @GetMapping("/statcategorie")
+    public ResponseEntity<HashMap<String, Object>> getStatVente_categorie() {
+        HashMap<String, Object> hashMap_categorie_stat = new HashMap<>();
+
+        double totalVentes = (double)venteService.countAllVentes();
+        System.out.println("total ventes : " + totalVentes);
+        for(Categorie categorie : categorieService.getAllCategorie())
+        {
+            System.out.println("id categorie : " + categorie.getId());
+            List<Vente> ventes_one_categorie = venteService.getAllStatFromOneCategorie(categorie.getId());
+            // System.out.println("vente one marque.size : " + ventes_one_categorie.size());
+            hashMap_categorie_stat.put(categorie.getNom(), (ventes_one_categorie.size()/totalVentes)*100);
+        }
+
+        return new ResponseEntity<HashMap<String, Object>>(hashMap_categorie_stat, HttpStatus.OK);
+    }
+    
+    
 }

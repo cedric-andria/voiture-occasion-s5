@@ -1,6 +1,7 @@
 package com.ced.app.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,4 +49,19 @@ public class PhotoVoitureService {
     {
         return photoVoitureRepository.save(photovoiture);
     }
+
+    // public List<PhotoVoiture> getByidVoiture(int idvoiture)
+    // {
+    //     String nativeQuery = "SELECT * FROM Annonce where etat < 10";
+    //     jakarta.persistence.Query query = entityManager.createNativeQuery(nativeQuery, Annonce.class);
+
+    //     @SuppressWarnings("unchecked")
+    //     List<Annonce> annonces = query.getResultList();
+    //     int id_voiture_correspondant = 0;
+    //     for (Annonce annonce : annonces) {
+    //         id_voiture_correspondant = annonce.getVoiture().getId();
+    //         List<PhotoVoiture> list_photo = new ArrayList<>();
+
+    //     }
+    // }
 }

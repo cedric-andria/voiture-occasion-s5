@@ -17,9 +17,14 @@ create table Utilisateur(
     mdp varchar(100),
     id_profil int references Profil(id)
 );
+-- tsy admin
 insert into Utilisateur(nom, identifiant, mdp, id_profil) values ('Rakoto', 'rakoto@gmail.com', 'rakoto123', 1);
 insert into Utilisateur(nom, identifiant, mdp, id_profil) values ('Randria', 'randria@gmail.com', 'randria123', 1);
 insert into Utilisateur(nom, identifiant, mdp, id_profil) values ('Rabe', 'rabe@gmail.com', 'rabe123', 1);
+--tsy admin
+--admin
+insert into Utilisateur(nom, identifiant, mdp, id_profil) values ('Admin', 'admin@gmail.com', 'admin123', 2);
+
 
 create table Marque(
     id serial primary key,
@@ -101,12 +106,23 @@ create table Photo(
     id_voiture int references Voiture(id),
     chemin varchar(100)
 );
-insert into Photo(id_voiture, chemin) values (1, 'user/2/voiture/1/black1.jpg');
-insert into Photo(id_voiture, chemin) values (1, 'user/2/voiture/1/black2.jpg');
-insert into Photo(id_voiture, chemin) values (1, 'user/2/voiture/1/black3.jpg');
-insert into Photo(id_voiture, chemin) values (2, 'user/2/voiture/2/red1.jpg');
-insert into Photo(id_voiture, chemin) values (2, 'user/2/voiture/2/red2.jpg');
-insert into Photo(id_voiture, chemin) values (2, 'user/2/voiture/2/red3.jpg');
+insert into Photo(id_voiture, chemin) values (1, 'https://i.ibb.co/Ht3BBXJ/black1.jpg');
+insert into Photo(id_voiture, chemin) values (1, 'https://i.ibb.co/qFjSvH3/black2.jpg');
+insert into Photo(id_voiture, chemin) values (1, 'https://i.ibb.co/4JRD9CP/black3.jpg');
+insert into Photo(id_voiture, chemin) values (2, 'https://i.ibb.co/2cDRS7q/red1.jpg');
+insert into Photo(id_voiture, chemin) values (2, 'https://i.ibb.co/QrJpcYG/red2.jpg');
+insert into Photo(id_voiture, chemin) values (2, 'https://i.ibb.co/wLb2XXk/red3.jpg');
+insert into Photo(id_voiture, chemin) values (4, 'https://i.ibb.co/HqLgvGS/hatch1.jpg');
+insert into Photo(id_voiture, chemin) values (4, 'https://i.ibb.co/wQGngsQ/hatch2.jpg');
+insert into Photo(id_voiture, chemin) values (4, 'https://i.ibb.co/CHTJGXg/hatch3.jpg');
+insert into Photo(id_voiture, chemin) values (5, 'https://i.ibb.co/JqzB7s0/cat.jpg');
+insert into Photo(id_voiture, chemin) values (5, 'https://i.ibb.co/wcCXsSZ/CAt-303-CR.jpg');
+insert into Photo(id_voiture, chemin) values (5, 'https://i.ibb.co/bF0xk0y/cat3.jpg');
+
+-- insert into Photo(id_voiture, chemin) values (1, 'user/2/voiture/1/black3.jpg');
+-- insert into Photo(id_voiture, chemin) values (2, 'user/2/voiture/2/red1.jpg');
+-- insert into Photo(id_voiture, chemin) values (2, 'user/2/voiture/2/red2.jpg');
+-- insert into Photo(id_voiture, chemin) values (2, 'user/2/voiture/2/red3.jpg');
 -- insert into Photo(id_voiture, chemin) values (3, 'user/3/voiture/3/black1.jpg');
 -- insert into Photo(id_voiture, chemin) values (3, 'user/3/voiture/3/black1.jpg');
 -- insert into Photo(id_voiture, chemin) values (3, 'user/3/voiture/3/black1.jpg');
@@ -137,6 +153,22 @@ create table Photovoiture (
     id_photo int references Photo(id),
     id_annonce int references Annonce(id)
 );
+insert into photovoiture (id_photo, id_annonce) values (7, 1);
+insert into photovoiture (id_photo, id_annonce) values (8, 1);
+insert into photovoiture (id_photo, id_annonce) values (9, 1);
+
+insert into photovoiture (id_photo, id_annonce) values (10, 2);
+insert into photovoiture (id_photo, id_annonce) values (11, 2);
+insert into photovoiture (id_photo, id_annonce) values (12, 2);
+
+insert into photovoiture (id_photo, id_annonce) values (13, 5);
+insert into photovoiture (id_photo, id_annonce) values (14, 5);
+insert into photovoiture (id_photo, id_annonce) values (15, 5);
+
+insert into photovoiture (id_photo, id_annonce) values (16, 6);
+insert into photovoiture (id_photo, id_annonce) values (17, 6);
+insert into photovoiture (id_photo, id_annonce) values (18, 6);
+
 
 create table HistoriqueAnnonce (
     id serial primary key,
@@ -221,4 +253,5 @@ BEFORE INSERT OR UPDATE ON Vente
 FOR EACH ROW
 EXECUTE FUNCTION check_date_vente();
 
--- insert into Vente (id_annonce, id_client, prix, date_vente) values ();
+insert into Vente (id_annonce, id_client, prix, date_vente) values (2, 1, 500000000, '2020-01-26');
+insert into Vente (id_annonce, id_client, prix, date_vente) values (5, 4, 250000000, '2023-05-15');

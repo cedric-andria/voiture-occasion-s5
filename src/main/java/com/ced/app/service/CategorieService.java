@@ -29,6 +29,10 @@ public class CategorieService {
         return categorieRepository.findById(id);
     }
 
+    public Categorie update(Categorie categorie){
+        return categorieRepository.save(categorie);
+    }
+
     public void deleteCategorie(int id)
     {
         if(!categorieRepository.existsById(id))
@@ -51,14 +55,14 @@ public class CategorieService {
         return emp;
     }
 
-    public void addCategorie(Categorie categorie) {
+    public Categorie addCategorie(Categorie categorie) {
         Optional<Categorie> categorieExist = categorieRepository.findByNom(categorie.getNom());
         if(categorieExist.isPresent())
         {
             throw new IllegalStateException("Categorie : "+categorie+" deja dans la base");
         }
-        categorieRepository.save(categorie);
-        System.out.println(categorie.toString() +" TONGA soamantsara");
+        return categorieRepository.save(categorie);
+        // System.out.println(categorie.toString() +" TONGA soamantsara");
     }
 
     public Categorie getCategorieById(int id)

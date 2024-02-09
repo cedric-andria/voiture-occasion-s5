@@ -65,6 +65,7 @@ public class Utilisateur {
                 .claim("id", user.getId())
                 .claim("identifiant",user.getIdentifiant())
                 .claim("nom",user.getNom())
+                .claim("idprofil", user.getProfil().getId())
                 .setExpiration(new Date(System.currentTimeMillis() + 864000000)) // 10 days validity\
                 .signWith(SignatureAlgorithm.HS512, "mytoken00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
                 .compact();
@@ -131,8 +132,13 @@ public class Utilisateur {
     }
 
     public static String extractId(String token){
-        return (String) Utilisateur.extractClaims(token).get("id");
+        return Utilisateur.extractClaims(token).get("id").toString();
     }
+
+    public static String extractIdprofil(String token){
+            return Utilisateur.extractClaims(token).get("idprofil").toString();
+        }
+    
 
     public static String extractToken(String bearerToken) throws Exception{
         if (bearerToken.startsWith("Bearer ")){
@@ -186,7 +192,5 @@ public class Utilisateur {
     public void setProfil(Profil profil) {
         this.profil = profil;
     }
-
-    
 
 }

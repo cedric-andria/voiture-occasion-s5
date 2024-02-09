@@ -1,5 +1,6 @@
 package com.ced.app.service;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +57,17 @@ public class AnnonceService {
         return annonceRepository.findAll();
     }
 
+    public List<Annonce> getAnnoncesValidees() {
+            // return stockMateriauRepository.findTopByMateriauIdOrderByDate_stockDesc(idMateriau);
+        String nativeQuery = "SELECT * FROM Annonce where etat = 10";
+        jakarta.persistence.Query query = entityManager.createNativeQuery(nativeQuery, Annonce.class);
+
+        @SuppressWarnings("unchecked")
+        List<Annonce> annonces = query.getResultList();
+        
+        return annonces;
+    }
+
     public List<Annonce> getAnnoncesNonValidees() {
         // return stockMateriauRepository.findTopByMateriauIdOrderByDate_stockDesc(idMateriau);
         String nativeQuery = "SELECT * FROM Annonce where etat < 10";
@@ -63,8 +75,40 @@ public class AnnonceService {
 
         @SuppressWarnings("unchecked")
         List<Annonce> annonces = query.getResultList();
-
+        // List<PhotoVoiture> photoVoituresNative = photoVoitureRepository.findAll();
+        // List<PhotoVoiture> list_photo_voiture_one_annonce = new ArrayList<>();
+        
+        // int id_annonce_correspondant = 0;
+        // for (Annonce annonce : annonces) {
+        //     id_annonce_correspondant = annonce.getVoiture().getId();
+        //     for (PhotoVoiture photoVoitureNative : photoVoituresNative) {
+        //         if (id_annonce_correspondant == photoVoitureNative.getAnnonce().getId()) {
+        //             list_photo_voiture_one_annonce.add(photoVoitureNative);
+        //         }
+        //     }
+        //     annonce.setPhotos_voiture(new ArrayList<PhotoVoiture>(list_photo_voiture_one_annonce));
+        //     list_photo_voiture_one_annonce.clear();
+        // }
         return annonces;
+    }
+
+    public List<Annonce> getAnnonceOfUser(int id_user)
+    {
+        // String nativeQuery = "select ha.id, ha.id_annonce, ha.date_operation, ha.nouvel_etat from historiqueAnnonce ha join annonce on annonce.id = ha.id_annonce join voiture on voiture.id = annonce.id_voiture where id_vendeur = :id_user order by ha.id";
+        // jakarta.persistence.Query query = entityManager.createNativeQuery(nativeQuery, HistoriqueAnnonce.class);
+        // query.setParameter("id_user", id_user);
+
+        // @SuppressWarnings("unchecked")
+        // List<HistoriqueAnnonce> historiqueAnnonces = query.getResultList();
+        List<Annonce> annoncesOfUser = new ArrayList<>();
+        List<Annonce> annoncesNative = annonceRepository.findAll();
+        for (Annonce annonceNative : annoncesNative) {
+            if (annonceNative.getVoiture().getVendeur().getId() == id_user) {
+                annoncesOfUser.add(annonceNative);
+            }
+        }
+
+        return annoncesOfUser;
     }
 
     public Annonce getById(int id)

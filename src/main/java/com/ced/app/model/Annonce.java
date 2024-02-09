@@ -3,6 +3,8 @@ package com.ced.app.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -26,17 +28,24 @@ public class Annonce {
     private String description;
     private int etat;
     private LocalDateTime date_publication;
-    @Transient
-    private List<PhotoVoiture> photos_voiture;
+    // @JsonIgnore
+    // @Transient
+    // private List<PhotoVoiture> photos_voiture;
+    @ManyToMany
+    @JoinTable(
+        name = "photovoiture", joinColumns = @JoinColumn(name = "id_annonce"), inverseJoinColumns = @JoinColumn(name = "id_photo")
+    )
+    private List<Photo> photos_voiture;
+
     
-    public Annonce(double prix, String description, int etat, LocalDateTime date_publication,
-            List<PhotoVoiture> photos_voiture) {
-        this.prix = prix;
-        this.description = description;
-        this.etat = etat;
-        this.date_publication = date_publication;
-        this.photos_voiture = photos_voiture;
-    }
+    // public Annonce(double prix, String description, int etat, LocalDateTime date_publication,
+    //         List<PhotoVoiture> photos_voiture) {
+    //     this.prix = prix;
+    //     this.description = description;
+    //     this.etat = etat;
+    //     this.date_publication = date_publication;
+    //     this.photos_voiture = photos_voiture;
+    // }
     public Annonce(double prix, String description, int etat, LocalDateTime date_publication) {
         this.prix = prix;
         this.description = description;
@@ -96,11 +105,17 @@ public class Annonce {
     public void setDate_publication(LocalDateTime date_publication) {
         this.date_publication = date_publication;
     }
-    public List<PhotoVoiture> getPhotos_voiture() {
+    public List<Photo> getPhotos_voiture() {
         return photos_voiture;
     }
-    public void setPhotos_voiture(List<PhotoVoiture> photos_voiture) {
+    public void setPhotos_voiture(List<Photo> photos_voiture) {
         this.photos_voiture = photos_voiture;
     }
+    // public List<PhotoVoiture> getPhotos_voiture() {
+    //     return photos_voiture;
+    // }
+    // public void setPhotos_voiture(List<PhotoVoiture> photos_voiture) {
+    //     this.photos_voiture = photos_voiture;
+    // }
 
 }

@@ -5,6 +5,8 @@ import com.ced.app.model.Modele;
 import com.ced.app.service.MarqueService;
 import com.ced.app.service.ModeleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +22,13 @@ public class ModeleController {
     @Autowired
     private MarqueService service;
     @PostMapping
-    public void save(@RequestBody Map<String, String>data ){
+    public ResponseEntity<Modele> save(@RequestBody Map<String, String>data ){
 
         String nom = data.get("nom");
 
         Marque marque = service.getMarqueById(Integer.valueOf(data.get("id_marque")));
         Modele model = new Modele(nom,marque);
-        modeleService.save(model);
+        return new ResponseEntity<Modele>(modeleService.save(model), HttpStatus.OK);
 
     }
 

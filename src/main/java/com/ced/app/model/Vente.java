@@ -18,7 +18,7 @@ public class Vente {
     @JoinColumn(name="id_annonce")
     private Annonce annonce;
     @ManyToOne
-    @JoinColumn(name="id_utilisateur")
+    @JoinColumn(name="id_client")
     private Utilisateur client;
     private double prix;
     private LocalDateTime date_vente;

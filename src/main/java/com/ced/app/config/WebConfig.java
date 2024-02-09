@@ -38,6 +38,8 @@ public class WebConfig implements WebMvcConfigurer {
 
         // registry.addInterceptor(profilInterceptor()).addPathPatterns("/annonces/{id}").excludePathPatterns(HttpMethod.GET.toString());
 
+        // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie");
+
         // registry.addInterceptor(profilInterceptor()).addPathPatterns("/Categorie/{id}")
         //     .excludePathPatterns(HttpMethod.GET.toString());
 

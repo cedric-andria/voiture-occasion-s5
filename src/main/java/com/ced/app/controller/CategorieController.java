@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "Categorie")
-@CrossOrigin(origins = "*", methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Content-Type", "Authorization"}, allowCredentials = "true")
 public class CategorieController {
     @Autowired
     private CategorieService categorieService;
@@ -43,14 +43,17 @@ public class CategorieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categorie> updateCategorire(@RequestHeader("Authorization") String bearerToken, @PathVariable("id") int id, @RequestParam(required = false) String nom)
+    public ResponseEntity<Categorie> updateCategorire(@PathVariable("id") int id, @RequestBody Categorie categorie)
     {
         Optional<Categorie> existingCategorieOptional = categorieService.findById(id);
         if (existingCategorieOptional.isPresent()) {
 
             // Save the updated Annonce
-            Categorie savedCategorie = categorieService.updateCategorie(id,nom);
-
+            categorie.setId(existingCategorieOptional.get().getId());
+            // Categorie savedCategorie = categorieService.updateCategorie(id,nom);
+            Categorie savedCategorie = categorieService.update(categorie);
+            System.out.println("Status ok");
+            
             return new ResponseEntity<>(savedCategorie, HttpStatus.OK);
         } else {
             // Annonce with the given id not found
@@ -59,9 +62,10 @@ public class CategorieController {
     }
 
     @PostMapping("")
-    public void addNewCategorie( @RequestBody Categorie categorie)
+    public ResponseEntity<Categorie> addNewCategorie(@RequestBody Categorie categorie)
     {
-        this.categorieService.addCategorie(categorie);
+        Categorie savedCategorie = this.categorieService.addCategorie(categorie);
+        return new ResponseEntity<>(savedCategorie, HttpStatus.OK);
     }
 
     @GetMapping("/nbVenteBetween")

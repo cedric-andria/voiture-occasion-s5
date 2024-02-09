@@ -1,5 +1,6 @@
 package com.ced.app.service;
 
+import com.ced.app.model.Categorie;
 import com.ced.app.model.Marque;
 import com.ced.app.repository.MarqueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 // import com.ced.app.crud.service.GenericService;
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MarqueService {
@@ -26,6 +25,10 @@ public class MarqueService {
         return marqueRepository.findAll();
     }
 
+    public Optional<Marque> findById(int id){
+        return marqueRepository.findById(id);
+    }
+
     public void deleteMarque(int id)
     {
         if(!marqueRepository.existsById(id))
@@ -34,6 +37,11 @@ public class MarqueService {
         }
         System.out.println(marqueRepository.findById(id).toString()+" will be DELETED");
         marqueRepository.deleteById(id);
+    }
+
+    public Marque update(Marque marque)
+    {
+        return marqueRepository.save(marque);
     }
 
     @Transactional
@@ -47,14 +55,14 @@ public class MarqueService {
         System.out.println("UPDATE REUSSI");
     }
 
-    public void addMarque(Marque marque) {
+    public Marque addMarque(Marque marque) {
         Optional<Marque> marqueExist = marqueRepository.findByNom(marque.getNom());
         if(marqueExist.isPresent())
         {
             throw new IllegalStateException("Marque : "+marque+" deja dans la base");
         }
-        marqueRepository.save(marque);
-        System.out.println(marque.toString() +" TONGA soamantsara");
+        return marqueRepository.save(marque);
+        // System.out.println(marque.toString() +" TONGA soamantsara");
     }
 
     public Marque getMarqueById(int id)

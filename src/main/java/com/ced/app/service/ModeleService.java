@@ -21,8 +21,8 @@ public class ModeleService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void save(Modele model){
-        repo.save(model);
+    public Modele save(Modele model){
+        return repo.save(model);
     }
 
     public Modele getById(int id)

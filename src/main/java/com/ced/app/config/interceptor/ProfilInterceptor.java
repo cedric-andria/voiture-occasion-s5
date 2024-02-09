@@ -24,7 +24,7 @@ public class ProfilInterceptor implements HandlerInterceptor {
                 Utilisateur user = utilisateurService.getByEmail(Utilisateur.extractEmail(token));
                 if (user != null){
                     System.out.println("Id profil de l'user : " + user.getProfil().getId());
-                    if (user.getProfil().getId() != 1) {
+                    if (user.getProfil().getId() != 2) {
                         throw new Exception("Methode non autorise pour l'utilisateur");
                     }
                     System.out.println("===============================middleware");

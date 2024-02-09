@@ -1,8 +1,11 @@
 package com.ced.app.controller;
 
+import com.ced.app.model.Categorie;
 import com.ced.app.model.Marque;
 import com.ced.app.service.MarqueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.ced.app.service.MarqueService;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +15,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "Marque")
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Content-Type", "Authorization"}, allowCredentials = "true")
 public class MarqueController {
     @Autowired
     private MarqueService marqueService;
@@ -43,15 +47,30 @@ public class MarqueController {
     }
 
     @PutMapping("/{id}")
-    public void updateMarque(@PathVariable("id") int id, @RequestParam(required = false) String nom)
+    public ResponseEntity<Marque> updateMarque(@PathVariable("id") int id, @RequestBody Marque marque)
     {
-        marqueService.updateMarque(id,nom);
+        // marqueService.updateMarque(id,nom);
+        Optional<Marque> existingMarqueOptional = marqueService.findById(id);
+        if (existingMarqueOptional.isPresent()) {
+
+            // Save the updated Annonce
+            marque.setId(existingMarqueOptional.get().getId());
+            // Categorie savedCategorie = categorieService.updateCategorie(id,nom);
+            Marque savedMarque = marqueService.update(marque);
+            System.out.println("Status ok");
+            
+            return new ResponseEntity<>(savedMarque, HttpStatus.OK);
+        } else {
+            // Annonce with the given id not found
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("")
-    public void addNewMarque( @RequestBody Marque marque)
+    public ResponseEntity<Marque> addNewMarque(@RequestBody Marque marque)
     {
-        this.marqueService.addMarque(marque);
+        Marque savedMarque = this.marqueService.addMarque(marque);
+        return new ResponseEntity<Marque>(savedMarque, HttpStatus.OK);
     }
 
     @GetMapping("/nbVenteBetween")
