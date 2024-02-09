@@ -137,9 +137,9 @@ public class AnnonceService {
         try {
             //rehefa eo am react dia ny object annonce asiana array de photos_voiture
             voiture_temporaire = voitureRepository.save(annonce.getVoiture());
-            for (PhotoVoiture photo_annonce : annonce.getPhotos_voiture()) {
+            for (Photo photo_annonce : annonce.getPhotos_voiture()) {
                 //mbola ilay chemin cote client izy eto fa miandry anle response zay vao azo ilay chemin alefa any am base
-                formData.add("image", photo_annonce.getPhoto().getChemin());
+                formData.add("image", photo_annonce.getChemin());
                 try {
                     String ws_response = restTemplate.postForObject("https://api.imgbb.com/1/upload?key=ca01a4a5f52ac1e27bb4d636d622ba24", formData, String.class);
                     System.out.println("ws_response :" + ws_response);
@@ -147,9 +147,9 @@ public class AnnonceService {
                     imgbb_unique_link_image = part_ilaina.substring(part_ilaina.lastIndexOf("i.ibb.co\\/")+10, part_ilaina.lastIndexOf("\\/"));
 
                     //efa ilay lien any am imgbb no alefa any am base
-                    photo_annonce.getPhoto().setChemin(imgbb_unique_link_image + "/" + photo_annonce.getPhoto().getChemin());
+                    photo_annonce.setChemin(imgbb_unique_link_image + "/" + photo_annonce.getPhoto().getChemin());
 
-                    photo_temporaire = photoRepository.save(new Photo(voiture_temporaire, photo_annonce.getPhoto().getChemin()));
+                    photo_temporaire = photoRepository.save(new Photo(voiture_temporaire, photo_annonce.getChemin()));
                     photoVoiture_temporaire = photoVoitureRepository.save(new PhotoVoiture(photo_temporaire, annonce));
                 } catch (Exception e) {
                     e.printStackTrace();
