@@ -185,21 +185,21 @@ insert into annonce (id_voiture, prix, description, etat, date_publication) valu
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 
-insert into photovoiture (id_photo, id_annonce) values (7, 1);
-insert into photovoiture (id_photo, id_annonce) values (8, 1);
-insert into photovoiture (id_photo, id_annonce) values (9, 1);
+insert into photovoiture (id_photo, id_annonce) values (1, 1);
+insert into photovoiture (id_photo, id_annonce) values (2, 1);
+insert into photovoiture (id_photo, id_annonce) values (3, 1);
 
-insert into photovoiture (id_photo, id_annonce) values (10, 2);
-insert into photovoiture (id_photo, id_annonce) values (11, 2);
-insert into photovoiture (id_photo, id_annonce) values (12, 2);
+insert into photovoiture (id_photo, id_annonce) values (4, 2);
+insert into photovoiture (id_photo, id_annonce) values (5, 2);
+insert into photovoiture (id_photo, id_annonce) values (6, 2);
 
-insert into photovoiture (id_photo, id_annonce) values (13, 5);
-insert into photovoiture (id_photo, id_annonce) values (14, 5);
-insert into photovoiture (id_photo, id_annonce) values (15, 5);
+insert into photovoiture (id_photo, id_annonce) values (7, 3);
+insert into photovoiture (id_photo, id_annonce) values (8, 3);
+insert into photovoiture (id_photo, id_annonce) values (9, 3);
 
-insert into photovoiture (id_photo, id_annonce) values (16, 6);
-insert into photovoiture (id_photo, id_annonce) values (17, 6);
-insert into photovoiture (id_photo, id_annonce) values (18, 6);
+insert into photovoiture (id_photo, id_annonce) values (10, 4);
+insert into photovoiture (id_photo, id_annonce) values (11, 4);
+insert into photovoiture (id_photo, id_annonce) values (12, 4);
 
 
 insert into Favori(id_annonce, id_utilisateur) values (1, 3);
