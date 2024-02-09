@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "Marque")
-@CrossOrigin(origins = {"http://localhost:3000"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Content-Type", "Authorization"}, allowCredentials = "true")
+@CrossOrigin(origins = {"https://cosmic-kitsune-6bc1b6.netlify.app"}, methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Content-Type", "Authorization"}, allowCredentials = "true")
 public class MarqueController {
     @Autowired
     private MarqueService marqueService;

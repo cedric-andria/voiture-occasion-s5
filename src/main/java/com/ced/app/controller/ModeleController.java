@@ -14,7 +14,7 @@ import java.util.Objects;
 
 @RequestMapping("/modele")
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
+@CrossOrigin(origins = "https://cosmic-kitsune-6bc1b6.netlify.app", methods = {RequestMethod.OPTIONS, RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class ModeleController {
     @Autowired
     private ModeleService modeleService;
