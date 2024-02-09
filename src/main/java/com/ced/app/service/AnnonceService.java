@@ -147,7 +147,7 @@ public class AnnonceService {
                     imgbb_unique_link_image = part_ilaina.substring(part_ilaina.lastIndexOf("i.ibb.co\\/")+10, part_ilaina.lastIndexOf("\\/"));
 
                     //efa ilay lien any am imgbb no alefa any am base
-                    photo_annonce.setChemin(imgbb_unique_link_image + "/" + photo_annonce.getPhoto().getChemin());
+                    photo_annonce.setChemin(imgbb_unique_link_image + "/" + photo_annonce.getChemin());
 
                     photo_temporaire = photoRepository.save(new Photo(voiture_temporaire, photo_annonce.getChemin()));
                     photoVoiture_temporaire = photoVoitureRepository.save(new PhotoVoiture(photo_temporaire, annonce));
