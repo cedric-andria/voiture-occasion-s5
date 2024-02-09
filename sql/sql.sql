@@ -153,22 +153,6 @@ create table Photovoiture (
     id_photo int references Photo(id),
     id_annonce int references Annonce(id)
 );
-insert into photovoiture (id_photo, id_annonce) values (7, 1);
-insert into photovoiture (id_photo, id_annonce) values (8, 1);
-insert into photovoiture (id_photo, id_annonce) values (9, 1);
-
-insert into photovoiture (id_photo, id_annonce) values (10, 2);
-insert into photovoiture (id_photo, id_annonce) values (11, 2);
-insert into photovoiture (id_photo, id_annonce) values (12, 2);
-
-insert into photovoiture (id_photo, id_annonce) values (13, 5);
-insert into photovoiture (id_photo, id_annonce) values (14, 5);
-insert into photovoiture (id_photo, id_annonce) values (15, 5);
-
-insert into photovoiture (id_photo, id_annonce) values (16, 6);
-insert into photovoiture (id_photo, id_annonce) values (17, 6);
-insert into photovoiture (id_photo, id_annonce) values (18, 6);
-
 
 create table HistoriqueAnnonce (
     id serial primary key,
@@ -194,19 +178,28 @@ EXECUTE FUNCTION insert_historique_annonce();
 --etat : 0 = publiee, 10 : validee, 20 : vendue
 insert into annonce (id_voiture, prix, description, etat, date_publication) values (1, 150000000, 'Voiture tena tsara, description exemple for id_voiture 1', 10, current_date);
 insert into annonce (id_voiture, prix, description, etat, date_publication) values (2, 480000000, 'Voiture haut de gamme, , description exemple for id_voiture 2', 10, current_date);
+insert into annonce (id_voiture, prix, description, etat, date_publication) values (4, 300000000, 'Voiture ultra fiable, chassis et pare-choc solides, 4 roues motrices', 0, current_date);
 insert into annonce (id_voiture, prix, description, etat, date_publication) values (5, 90000000, 'Engin de construction, etat moyen, 80 tonnes, prix TTC', 0, current_date);
 
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 -- insert into annonce (id_voiture, prix, description, etat, date_publication) values ();
 
-insert into Photovoiture (id_photo, id_annonce) values (1, 1);
-insert into Photovoiture (id_photo, id_annonce) values (2, 1);
-insert into Photovoiture (id_photo, id_annonce) values (3, 1);
+insert into photovoiture (id_photo, id_annonce) values (7, 1);
+insert into photovoiture (id_photo, id_annonce) values (8, 1);
+insert into photovoiture (id_photo, id_annonce) values (9, 1);
 
-insert into Photovoiture (id_photo, id_annonce) values (4, 2);
-insert into Photovoiture (id_photo, id_annonce) values (5, 2);
-insert into Photovoiture (id_photo, id_annonce) values (6, 2);
+insert into photovoiture (id_photo, id_annonce) values (10, 2);
+insert into photovoiture (id_photo, id_annonce) values (11, 2);
+insert into photovoiture (id_photo, id_annonce) values (12, 2);
+
+insert into photovoiture (id_photo, id_annonce) values (13, 5);
+insert into photovoiture (id_photo, id_annonce) values (14, 5);
+insert into photovoiture (id_photo, id_annonce) values (15, 5);
+
+insert into photovoiture (id_photo, id_annonce) values (16, 6);
+insert into photovoiture (id_photo, id_annonce) values (17, 6);
+insert into photovoiture (id_photo, id_annonce) values (18, 6);
 
 
 insert into Favori(id_annonce, id_utilisateur) values (1, 3);
