@@ -234,7 +234,7 @@ create table Vente (
 CREATE OR REPLACE FUNCTION check_date_vente()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF NEW.date_vente <= (SELECT date_vente FROM Annonce WHERE id = NEW.id_annonce) THEN
+    IF NEW.date_vente <= (SELECT date_publication FROM Annonce WHERE id = NEW.id_annonce) THEN
         RAISE EXCEPTION 'date_vente must be greater than date_publication';
     END IF;
     RETURN NEW;
@@ -246,5 +246,5 @@ BEFORE INSERT OR UPDATE ON Vente
 FOR EACH ROW
 EXECUTE FUNCTION check_date_vente();
 
-insert into Vente (id_annonce, id_client, prix, date_vente) values (2, 1, 500000000, '2020-01-26');
-insert into Vente (id_annonce, id_client, prix, date_vente) values (5, 4, 250000000, '2023-05-15');
+insert into Vente (id_annonce, id_client, prix, date_vente) values (2, 1, 500000000, '2025-01-26');
+insert into Vente (id_annonce, id_client, prix, date_vente) values (4, 4, 250000000, '2026-05-15');
